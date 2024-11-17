@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent  from '@testing-library/user-event';
 
 // To Test
-import App from '../App';
+import AppLayout from '../components/layout/AppLayout.tsx';
 
 // Tests
 describe('Renders main page correctly', async () => {
@@ -13,7 +13,7 @@ describe('Renders main page correctly', async () => {
      */
     it('Should render the page correctly', async () => {
         // Setup
-        render(<App/>);
+        render(<AppLayout/>);
         const h1 = screen.queryByText('Vite + React');
 
         // Post Expectations
@@ -25,7 +25,7 @@ describe('Renders main page correctly', async () => {
      */
     it('Should show the button count set to 0', async () => {
         // Setup
-        render(<App/>);
+        render(<AppLayout/>);
         const button = screen.queryByText('count is 0');
 
         // Expectations
@@ -38,7 +38,7 @@ describe('Renders main page correctly', async () => {
     it('Should show the button count set to 3', async () => {
         // Setup
         const user = userEvent.setup();
-        render(<App/>);
+        render(<AppLayout/>);
         const button = screen.queryByText('count is 0');
 
         // Pre Expectations
