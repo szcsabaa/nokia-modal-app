@@ -6,6 +6,8 @@ import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import BasicExample from "./components/pages/BasicExample.tsx";
 import {ModalProvider} from "./context/ModalContext.tsx";
 import MultipleModalPage from "./components/pages/MultipleModalPage.tsx";
+import RegisterPage from "./components/pages/RegisterPage.tsx";
+import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 
 const router = createBrowserRouter([
   {
@@ -25,16 +27,20 @@ const router = createBrowserRouter([
       },
       {
         path: "/form",
-        element: <div>Form example</div>,
+        element: <RegisterPage />,
       },
     ]
   },
 ]);
 
+const queryClient = new QueryClient()
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <ModalProvider>
-      <RouterProvider router={router}/>
-    </ModalProvider>
+    <QueryClientProvider client={queryClient}>
+      <ModalProvider>
+        <RouterProvider router={router}/>
+      </ModalProvider>
+    </QueryClientProvider>
   </StrictMode>,
 )
