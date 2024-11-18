@@ -1,8 +1,11 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import {StrictMode} from 'react'
+import {createRoot} from 'react-dom/client'
 import './index.css'
 import AppLayout from './components/layout/AppLayout.tsx'
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import BasicExample from "./components/pages/BasicExample.tsx";
+import {ModalProvider} from "./context/ModalContext.tsx";
+import MultipleModalPage from "./components/pages/MultipleModalPage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -14,11 +17,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/basic",
-        element: <div>Basic modal example</div>,
+        element: <BasicExample/>,
       },
       {
         path: "/multiple",
-        element: <div>Multiple modal example</div>,
+        element: <MultipleModalPage/>,
       },
       {
         path: "/form",
@@ -30,6 +33,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <ModalProvider>
+      <RouterProvider router={router}/>
+    </ModalProvider>
   </StrictMode>,
 )
