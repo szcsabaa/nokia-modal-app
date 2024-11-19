@@ -7,6 +7,7 @@ import {ModalProvider} from "./context/ModalContext.tsx";
 import MultipleModalPage from "./components/pages/MultipleModalPage.tsx";
 import RegisterPage from "./components/pages/RegisterPage.tsx";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+import HomePage from "./components/pages/HomePage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -14,7 +15,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <div>Home</div>,
+        element: <HomePage/>,
       },
       {
         path: "/multiple",
