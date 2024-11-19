@@ -1,27 +1,12 @@
 import {useModal} from "../../hooks/useModal.ts";
 import RegisterForm from "../form/RegisterForm.tsx";
 import {ModalContentDefaultStyles} from "../modal/defaultStyleClasses.ts";
+import {useCallback} from "react";
 
 const RegisterPage: React.FC = () => {
   const { openModal, closeModal } = useModal();
 
-  const openRegisterForm = () => {
-    openModal(
-      <RegisterForm onSubmitSuccess={() => {
-        closeModal('register-form'); // Close the register form modal
-        openSuccessConfirmation();
-      }} />,
-      {
-        id: 'register-form',
-        title: 'Register',
-        containerCustomClass: ModalContentDefaultStyles.container + ' !bg-gray-100 !text-black !max-w-md',
-        closeOnEsc: true,
-        showCloseButton: true,
-      }
-    );
-  };
-
-  const openSuccessConfirmation = () => {
+  const openSuccessConfirmation = useCallback(() => {
     openModal(
       <div>
         <p className="text-center">Registration Successful!</p>
@@ -40,7 +25,23 @@ const RegisterPage: React.FC = () => {
         ],
       }
     );
-  };
+  }, [openModal, closeModal]);
+
+  const openRegisterForm = useCallback(() => {
+    openModal(
+      <RegisterForm onSubmitSuccess={() => {
+        closeModal('register-form'); // Close the register form modal
+        openSuccessConfirmation();
+      }} />,
+      {
+        id: 'register-form',
+        title: 'Register',
+        containerCustomClass: ModalContentDefaultStyles.container + ' !bg-gray-100 !text-black !max-w-md',
+        closeOnEsc: true,
+        showCloseButton: true,
+      }
+    );
+  }, [openModal, closeModal, openSuccessConfirmation]);
 
   return (
     <div className="p-10">

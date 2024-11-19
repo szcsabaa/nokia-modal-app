@@ -1,69 +1,23 @@
-import clsx from 'clsx';
-import {FC, ReactNode} from "react";
-import {ModalButtonConfig} from "../../types/modal.ts";
-import {ModalContentDefaultStyles} from "./defaultStyleClasses.ts";
+import clsx from "clsx";
 
 interface ModalLayoutProps {
-  id: string;
-  title?: string;
-  content: ReactNode;
-  containerCustomClass?: string;
-  closeButtonCustomClass?: string;
-  titleCustomClass?: string;
-  ctaContainerCustomClass?: string;
-  showCloseButton?: boolean;
-  buttons?: ModalButtonConfig[];
-  onClose: () => void;
+  index: number;
+  children: React.ReactNode;
 }
 
-const ModalLayout: FC<ModalLayoutProps> = (props: ModalLayoutProps) => {
-  const {
-    title,
-    content,
-    containerCustomClass,
-    closeButtonCustomClass,
-    titleCustomClass,
-    ctaContainerCustomClass,
-    showCloseButton = true,
-    buttons = [],
-    onClose,
-  } = props
+const ModalLayout = ({index, children}: ModalLayoutProps) => {
   return (
     <div
       className={clsx(
-        containerCustomClass || ModalContentDefaultStyles.container,
+        'fixed inset-0 flex justify-center items-center',
+        `z-[${index + 100}]`,
+        'overflow-y-auto',
       )}
     >
-      {showCloseButton && (
-        <button
-          className={clsx(closeButtonCustomClass || ModalContentDefaultStyles.closeButton)}
-          onClick={onClose}
-        >
-          &times;
-        </button>
-      )}
-
-      {title && <h2 className={clsx(titleCustomClass || ModalContentDefaultStyles.title)}>{title}</h2>}
-
-      <div>{content}</div>
-
-      {buttons.length > 0 && (
-        <div className={clsx(ctaContainerCustomClass || ModalContentDefaultStyles.ctaContainer)}>
-          {buttons.map((button, idx) => (
-            <button
-              key={idx}
-              className={clsx(
-                button.customClass || ModalContentDefaultStyles.ctaButton
-              )}
-              onClick={button.onClick}
-            >
-              {button.label}
-            </button>
-          ))}
-        </div>
-      )}
+      <div className="absolute inset-0 bg-gray-800 bg-opacity-50"/>
+      {children}
     </div>
-  );
-};
+  )
+}
 
 export default ModalLayout;

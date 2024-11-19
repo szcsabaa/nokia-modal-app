@@ -9,8 +9,8 @@ const Header: React.FC = () => {
         </h1>
         <nav>
           <ul className="flex flex-col space-y-3 md:flex-row md:space-x-6 md:space-y-0">
-            <li><NavLink to={"/multiple"} className="hover:text-sky-500">Multiple</NavLink></li>
-            <li><NavLink to={"/form"} className="hover:text-sky-500">Form</NavLink></li>
+            <li><NavLink to={"/multiple"} className="hover:text-sky-500">Multiple Modal Opening</NavLink></li>
+            <li><NavLink to={"/form"} className="hover:text-sky-500">Form Modal</NavLink></li>
           </ul>
         </nav>
       </div>

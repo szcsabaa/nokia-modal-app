@@ -1,17 +1,11 @@
-import React, {useEffect} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {useModal} from "../../hooks/useModal.ts";
 import {ModalContentDefaultStyles} from "../modal/defaultStyleClasses.ts";
 
 const MultipleModalsPage: React.FC = () => {
   const { openModal, closeModal } = useModal();
 
-  useEffect(() => {
-    setTimeout(() => openXLModal(), 1000);
-    setTimeout(() => openLargeModal(), 3000);
-    setTimeout(() => openSmallModal(), 5000);
-  }, [])
-
-  const openLargeModal = () => {
+  const openLargeModal = useCallback(() => {
     openModal(
       <div>
         <p>This is a large modal with custom content!</p>
@@ -31,9 +25,9 @@ const MultipleModalsPage: React.FC = () => {
         ],
       }
     );
-  };
+  }, [openModal, closeModal]);
 
-  const openSmallModal = () => {
+  const openSmallModal = useCallback(() => {
     openModal(
       <div>
         <p>This is a small modal with custom content!</p>
@@ -53,9 +47,9 @@ const MultipleModalsPage: React.FC = () => {
         ],
       }
     );
-  };
+  }, [openModal, closeModal]);
 
-  const openXLModal = () => {
+  const openXLModal = useCallback(() => {
     openModal(
       <div>
         <p>This is a Extra Large modal with custom content!</p>
@@ -75,7 +69,13 @@ const MultipleModalsPage: React.FC = () => {
         ],
       }
     );
-  };
+  }, [openModal, closeModal]);
+
+  useEffect(() => {
+    setTimeout(() => openXLModal(), 1000);
+    setTimeout(() => openLargeModal(), 3000);
+    setTimeout(() => openSmallModal(), 5000);
+  }, [openLargeModal, openSmallModal, openXLModal])
 
   return (
     <div className="p-10 space-y-4">
