@@ -102,6 +102,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmitSuccess }) => {
 
       <button
         type="submit"
+        name={"register"}
         disabled={submitMutation.isPending}
         className="w-full py-2 bg-blue-500 text-white rounded"
       >

@@ -38,6 +38,7 @@ const ModalContent: React.FC<ModalContentProps> = (props: ModalContentProps) => 
         <button
           className={clsx(closeButtonCustomClass || ModalContentDefaultStyles.closeButton)}
           onClick={onClose}
+          name={"close"}
         >
           &times;
         </button>

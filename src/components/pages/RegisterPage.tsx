@@ -30,7 +30,7 @@ const RegisterPage: React.FC = () => {
   const openRegisterForm = useCallback(() => {
     openModal(
       <RegisterForm onSubmitSuccess={() => {
-        closeModal('register-form'); // Close the register form modal
+        closeModal('register-form');
         openSuccessConfirmation();
       }} />,
       {

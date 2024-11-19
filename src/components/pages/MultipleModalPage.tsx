@@ -73,8 +73,8 @@ const MultipleModalsPage: React.FC = () => {
 
   useEffect(() => {
     setTimeout(() => openXLModal(), 1000);
-    setTimeout(() => openLargeModal(), 3000);
-    setTimeout(() => openSmallModal(), 5000);
+    setTimeout(() => openLargeModal(), 2000);
+    setTimeout(() => openSmallModal(), 4000);
   }, [openLargeModal, openSmallModal, openXLModal])
 
   return (
