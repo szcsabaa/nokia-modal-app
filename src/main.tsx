@@ -3,7 +3,6 @@ import {createRoot} from 'react-dom/client'
 import './index.css'
 import AppLayout from './components/layout/AppLayout.tsx'
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
-import BasicExample from "./components/pages/BasicExample.tsx";
 import {ModalProvider} from "./context/ModalContext.tsx";
 import MultipleModalPage from "./components/pages/MultipleModalPage.tsx";
 import RegisterPage from "./components/pages/RegisterPage.tsx";
@@ -16,10 +15,6 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <div>Home</div>,
-      },
-      {
-        path: "/basic",
-        element: <BasicExample/>,
       },
       {
         path: "/multiple",

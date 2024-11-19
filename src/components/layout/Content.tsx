@@ -4,7 +4,7 @@ type ContentProps = {
 
 const Content: React.FC<ContentProps> = ({children}) => {
   return (
-    <main className="flex-grow bg-base py-8">
+    <main className="flex-grow bg-zinc-800 py-8">
       <div className="container mx-auto px-4">
         {children}
       </div>

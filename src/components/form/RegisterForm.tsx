@@ -1,18 +1,25 @@
-// src/components/RegisterForm.tsx
-
-import React from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { useMutation } from '@tanstack/react-query';
 import {zodResolver} from "@hookform/resolvers/zod";
 
-// Define Zod validation schema
+const passwordValidator = z.string()
+    .min(8, "Password must be at least 8 characters")
+    .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
+    .regex(/[a-z]/, "Password must contain at least one lowercase letter")
+    .regex(/\d/, "Password must contain at least one digit")
+    .regex(/[^A-Za-z0-9]/, "Password must contain at least one special character")
+
 const registerSchema = z.object({
-  name: z.string().min(1, { message: "Name is required" }),
-  mobilePhone: z.string().min(10, { message: "Invalid phone number" }),
-  email: z.string().email({ message: "Invalid email address" }),
-  username: z.string().min(4, { message: "Username must be at least 4 characters" }),
-  password: z.string().min(6, { message: "Password must be at least 6 characters" }),
+  name: z.string().min(1, {message: "Name is required"}),
+  mobilePhone: z.string().min(10, {message: "Invalid phone number"}),
+  email: z.string().email({message: "Invalid email address"}),
+  username: z.string().min(4, {message: "Username must be at least 4 characters"}),
+  password: passwordValidator,
+  confirmPassword: passwordValidator,
+}).refine((data) => data.password === data.confirmPassword, {
+  message: "Passwords don't match",
+  path: ["confirmPassword"],
 });
 
 type RegisterFormData = z.infer<typeof registerSchema>;
@@ -30,18 +37,17 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmitSuccess }) => {
     resolver: zodResolver(registerSchema),
   });
 
-  // Mocking the mutation with TanStack Query
-  const mutation = useMutation({
+  const submitMutation = useMutation({
     mutationFn: () => {
-      return new Promise((resolve) => setTimeout(resolve, 5000)); // Mocking API response
+      return new Promise((resolve) => setTimeout(resolve, 3000)); // Mocking API response
     },
     onSuccess: () => {
-      onSubmitSuccess(); // Close the register form modal and open the confirmation modal
+      onSubmitSuccess();
     },
   });
 
   const onSubmit = () => {
-    mutation.mutate();
+    submitMutation.mutate();
   };
 
   return (
@@ -101,12 +107,23 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmitSuccess }) => {
         {errors.password && <p className="text-red-500">{errors.password.message}</p>}
       </div>
 
+      <div>
+        <label htmlFor="confirmPassword" className="block">Confirm Password</label>
+        <input
+          id="confirmPassword"
+          type="password"
+          className="w-full p-2 border rounded bg-gray-100"
+          {...register('confirmPassword')}
+        />
+        {errors.confirmPassword && <p className="text-red-500">{errors.confirmPassword.message}</p>}
+      </div>
+
       <button
         type="submit"
-        disabled={mutation.isPending}
+        disabled={submitMutation.isPending}
         className="w-full py-2 bg-blue-500 text-white rounded"
       >
-        {mutation.isPending ? 'Submitting...' : 'Register'}
+        {submitMutation.isPending ? 'Submitting...' : 'Register'}
       </button>
     </form>
   );

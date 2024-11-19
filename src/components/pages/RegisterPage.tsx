@@ -4,12 +4,10 @@ import {ModalContentDefaultStyles} from "../modal/defaultStyleClasses.ts";
 
 const RegisterPage: React.FC = () => {
   const { openModal, closeModal } = useModal();
-  // const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
   const openRegisterForm = () => {
     openModal(
       <RegisterForm onSubmitSuccess={() => {
-        // setIsFormSubmitted(true); // Set form submission state to trigger confirmation modal
         closeModal('register-form'); // Close the register form modal
         openSuccessConfirmation();
       }} />,
@@ -38,7 +36,6 @@ const RegisterPage: React.FC = () => {
           {
             label: 'Close',
             onClick: () => closeModal('success-confirmation'),
-            customClass: 'bg-white text-green-500',
           },
         ],
       }
