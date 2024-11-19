@@ -35,14 +35,14 @@ const MultipleModalsPage: React.FC = () => {
       {
         id: 'small-modal',
         title: 'Small Modal',
-        containerCustomClass: ModalContentDefaultStyles.container + ' !bg-green-500 !max-w-sm', // Use custom class
+        containerCustomClass: ModalContentDefaultStyles.container + ' !bg-green-500 !max-w-sm',
         closeOnEsc: true,
         showCloseButton: true,
         buttons: [
           {
             label: 'Close',
             onClick: () => closeModal('small-modal'),
-            customClass: ModalContentDefaultStyles.ctaButton + ' !bg-yellow-500 !text-black', // Button custom class
+            customClass: ModalContentDefaultStyles.ctaButton + ' !bg-yellow-500 !text-black',
           },
         ],
       }
@@ -57,14 +57,14 @@ const MultipleModalsPage: React.FC = () => {
       {
         id: 'xl-modal',
         title: 'XL Modal',
-        containerCustomClass: ModalContentDefaultStyles.container + ' !bg-red-500 !max-w-xl', // Use custom class
+        containerCustomClass: ModalContentDefaultStyles.container + ' !bg-red-500 !max-w-xl',
         closeOnEsc: true,
         showCloseButton: true,
         buttons: [
           {
             label: 'Close',
             onClick: () => closeModal('xl-modal'),
-            customClass: ModalContentDefaultStyles.ctaButton + ' !bg-cyan-500', // Button custom class
+            customClass: ModalContentDefaultStyles.ctaButton + ' !bg-cyan-500',
           },
         ],
       }

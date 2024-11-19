@@ -21,7 +21,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmitSuccess }) => {
 
   const submitMutation = useMutation({
     mutationFn: () => {
-      return new Promise((resolve) => setTimeout(resolve, 3000)); // Mocking API response
+      return new Promise((resolve) => setTimeout(resolve, 3000)); // Mocking actual API call with a promise
     },
     onSuccess: () => {
       onSubmitSuccess();
